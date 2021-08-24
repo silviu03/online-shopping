@@ -66,15 +66,17 @@ main {
     padding: 0 20px;
 }
 main nav {
-    width: 50%;
-    margin: 0 auto;
     margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 main nav a {
     text-decoration: none;
     padding: 0 30px;
     color: inherit;
     font-size: 1.2em;
+    margin-right: 10px;
 }
 .products-wrapper {
     display: flex;
@@ -170,9 +172,6 @@ main nav a {
 .overlay-product-wrapper > div:last-child > span {
     display: block;
 }
-/* .overlay-product-wrapper > div:last-child > * {
-    margin-bottom: 10px;
-} */
 .product-size {
     display: flex;
     margin-top: 15px;
@@ -232,6 +231,11 @@ main nav a {
     cursor: pointer;
 }
 
+.active {
+    background-color: #f8d9e0;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
 .hidden {
     display: none;
 }
