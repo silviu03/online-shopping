@@ -150,6 +150,7 @@ main nav a {
     height: 350px;
     background-image: url(./poze/top-coat.jpg);
     background-position: center;
+    /* atentie, layout-ul cerea sa se repete totusi */
     background-repeat: no-repeat;
     background-size: cover;
     margin-bottom: -30px;

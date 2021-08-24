@@ -1,7 +1,8 @@
 $(function () {
+    // sa elimini console.log inainte de livrare, e ok sa livrezi clean fara urme de debug
     console.log('ready');
 
-    const productsWrapper = $('.produtcs-wrapper');
+    const productsWrapper = $('.produtcs-wrapper'); //atentie la typos
     console.log(productsWrapper);
 
     getPropertyHTML = function (productsObj) {
@@ -33,6 +34,7 @@ $(function () {
         console.log('first')
         let dataId = event.target.dataset.id -1;
         console.log(dataId)
+        // nu are mult sens sa creem overlay-ul de fiecare data cand dam click pe un produs, acesta poate sa existe in structura, dar ascuns, iar la click pe produs cu selectii doar sa populam dinamic continutul dorit (text, imagini, etc)
         let overlay = `<div class="overlay" data-id=${products['coats'][dataId].id}>
         <div class="close-overlay"><i class="fas fa-times"></i></div>
         <div class="overlay-product-wrapper">
@@ -76,7 +78,7 @@ $(function () {
 
     })
 
-    
+    // din nou, atentie la tot spatiul asta gol inutil aici
 
 
 

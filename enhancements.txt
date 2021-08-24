@@ -1,0 +1,8 @@
+Enhancements:
+- fill in products objects with all other products categories: dresses, jersey, pants (all should be arrays of objects)
+- implement click on category 
+    - relative data should be correctly retrieved -> products[coats], products[dresses] 
+    - the HTML structure remains the same, only the content will change
+
+- implement a separate page for the categories in the bottom: women, men, kids, new collection (this is a separate page and you should decide the design of this)
+- implement click event on these elements -> the click should open the page requested at the previous point and the data should be dynamically retrieved from an object (you should create a separate object similar with products.js, you should be the architect of its' content)
