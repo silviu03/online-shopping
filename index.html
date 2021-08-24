@@ -13,25 +13,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
     <meta http-equiv="refresh" content="">
-
     <meta name="description" content="Front end development course">
     <meta name="keywords" content="HTML,CSS,Learning">
     <meta name="author" content="Nebunu Silviu">
-    <!-- aceeasi observatie de mai jos -->
-    <link rel="stylesheet" href="bundles/font.awesome/fontawesome-free-5.15.4-web/css/all.css">
+    
+    <link rel="stylesheet" href="./bundles/font.awesome/fontawesome-free-5.15.4-web/css/all.min.css">
 
-    <!-- de ce ai urcat un nivel aici? nu se incarca libraria pt ca nu stie de unde sa o ia,,daca sunt probleme la navigare, te rog sa imi spui -->
-    <!-- <script src="../bundles/jquery/jquery-3.6.0.min.js"></script> -->
-    <script src="bundles/jquery/jquery-3.6.0.min.js"></script>
+    <script src="./bundles/jquery/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
     <div class="container">
         <header>
             <div>
-                <!-- sa nu uitam de partea semantica, aici erau ok de utilizat heading tags, h1, h2, etc -->
-                <span class="title">Shop at</span>
-                <span class="title">the right speed</span>
+                <h1 class="title">Shop at</h1>
+                <h2 class="title">the right speed</h2>
                 <span>The winter Collection</span>
                 <span>Liberated movement meets seamless support</span>
                 <button>Shop</button>
@@ -45,7 +41,7 @@
                 <a href="#">Jersey</a>
                 <a href="#">Pants</a>
             </nav>
-            <div class="produtcs-wrapper">
+            <div class="products-wrapper">
 
             </div>
             <!-- <div class="overlay hidden">
@@ -79,29 +75,56 @@
                         <p>Follow the care label on your coat when you are cleaning and treat any stains promptly bt
                             blotting.</p>
                         <div class="btn"><button>Add to Cart</button></div>
-                            
+  
                     </div>
                 </div>
             </div> -->
             <span class="categories">Categories</span>
             <div class="categories-wrapper">
-                <!-- semantic, aici link-uri ar fi de dorit sa avem -->
-                <span>Women</span>
-                <span>Men</span>
-                <span>Kids</span>
-                <span>New Collection</span>
+                <a href="#">Women</a>
+                <a href="#">Men</a>
+                <a href="#">Kids</a>
+                <a href="#">New Collection</a>
             </div>
         </main>
 
-        <!-- nu ii inteleg scopul -->
-        <div id="modals"></div>
+        <div>
+            <div class="overlay hidden">
+                <div class="close-overlay"><i class="fas fa-times"></i></div>
+                <div class="overlay-product-wrapper">
+                    <div class="product-bg-img"></div>
+                    <div>
+                        <h1 class="product-coat-name"></h1>
+                        <span class="product-currency-price"></span>
+                        <span>Your Size</span>
+                        <div class="product-size">
+                            <div><span>S</span></div>
+                            <div><span>M</span></div>
+                            <div><span>L</span></div>
+                            <div><span>XL</span></div> 
+                        </div>
+                        <div class="product-info">
+                            <a href="#">Details</a>
+                            <a href="#">Order</a>
+                            <a href="#">Payment</a>
+                        </div>
+                        <div class="small-details">
+                            <span>Composition</span>
+                            <span>Country</span>
+                        </div>
+                        <div class="small-details">
+                            <span class="product-composition"></span>
+                            <span class="product-country"></span>
+                        </div>
+                        <span>Care</span>
+                        <p class="product-care"></p>
+                        <div class="btn"><button>Add to Cart</button></div>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-<!-- atentie la spatii prea generoase, impacteaza code readability -->
-
-
-
-
-
 
     <script src="./online-shopping.js"></script>
     <script src="./products.js"></script>
