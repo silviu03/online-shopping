@@ -84,7 +84,7 @@ let products = {
             care: "A majority wool blend coats can't be washed safely at home in a machine and need to be taken to a specialized cleaner."
         }
     ],
-    jersey: [
+    jerseys: [
         {
             id: 9,
             name: "Top Jersey",

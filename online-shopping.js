@@ -1,179 +1,79 @@
 $(function () {
+    const productsWrapper = $('.products-wrapper'),
+          item = $('.item'),
+          overlay = $('.overlay'),
+          productBgImg = $('.product-bg-img'),
+          productCoatName = $('.product-name'),
+          productPrice = $('.product-currency-price'),
+          productCompozition = $('.product-composition'),
+          productCountry = $('.product-country'),
+          productCare = $('.product-care');
 
-    const productsWrapper = $('.products-wrapper');
-    console.log(productsWrapper);
-
-    getPropertyHTML = function (productsObj) {
-        console.log(productsObj);
-        return `<div class="product-wrapper" data-id=${productsObj.id}>
+    getPropertyHTML = function (productsObj, mainCategory) {
+        return `<div class="product-wrapper" data-self-category=${mainCategory} data-id=${productsObj.id}>
                     <div class="product-img" data-id=${productsObj.id} style="background-image: url('poze/${productsObj.imgUrl}')"></div>
                     <div>
                         <span>${productsObj.name}</span>
                         <span>${productsObj.currency} ${productsObj.price}</span>
                     </div>
                 </div>`
-    }
+    };
 
-    for (let i = 0; i < products['coats'].length; i++) {
-        let productsObj = products['coats'][i],
-            productsHTML = getPropertyHTML(productsObj);
-        productsWrapper.append(productsHTML);
-        $(".products-wrapper").find(`[data-id=${productsObj.id}]`).addClass('coats-item')
-    }
-    for (let i = 0; i < products['dresses'].length; i++) {
-        let productsObj = products['dresses'][i],
-            productsHTML = getPropertyHTML(productsObj);
-        productsWrapper.append(productsHTML);
-        $(".products-wrapper").find(`[data-id=${productsObj.id}]`).addClass('hidden dresses-item')
+    setProductsWrapperContent = function(mainCategory) {
+        for (let i = 0; i < products[mainCategory].length; i++) {
+            let productsObj = products[mainCategory][i],
+                // avem nevoie sa pasam si mainCategory aici dupa la selectia informatiei pentru fiecare produs in parte
+                productsHTML = getPropertyHTML(productsObj, mainCategory);
+            productsWrapper.append(productsHTML);
+            // concatenation is in order
+            $(".products-wrapper").find(`[data-id=${productsObj.id}]`).addClass(mainCategory + '-item')
+        }
+    };
 
-    }
-    for (let i = 0; i < products['jersey'].length; i++) {
-        let productsObj = products['jersey'][i],
-            productsHTML = getPropertyHTML(productsObj);
-        productsWrapper.append(productsHTML);
-        $(".products-wrapper").find(`[data-id=${productsObj.id}]`).addClass('hidden jersey-item')
-    }
-    for (let i = 0; i < products['pants'].length; i++) {
-        let productsObj = products['pants'][i],
-            productsHTML = getPropertyHTML(productsObj);
-        productsWrapper.append(productsHTML);
-        $(".products-wrapper").find(`[data-id=${productsObj.id}]`).addClass('hidden pants-item')
-    }
-
-    const coats = $('.coats'),
-            dresses = $('.dresses'),
-            jerseys = $('.jerseys'),
-            pants = $('.pants'),
-            item = $('.item');
+    // initial content to be displayed when the user first enters the portal
+    setProductsWrapperContent('coats');
 
     item.click(function(event) {
         item.removeClass('active')
-        $(event.target).addClass('active')
-    })
-    coats.click(function() {
-        if($('.coats-item').hasClass('hidden')) {
-            $('.coats-item').removeClass('hidden')
-            $('.dresses-item').addClass('hidden')
-            $('.jersey-item').addClass('hidden')
-            $('.pants-item').addClass('hidden')
-            
-        }
-    }) 
-    dresses.click(function() {
-        if($('.dresses-item').hasClass('hidden')) {
-            $('.dresses-item').removeClass('hidden')
-            $('.coats-item').addClass('hidden')
-            $('.jersey-item').addClass('hidden')
-            $('.pants-item').addClass('hidden')
-            
-        }
-    })  
-    jerseys.click(function() {
-        if($('.jersey-item').hasClass('hidden')) {
-            $('.jersey-item').removeClass('hidden')
-            $('.dresses-item').addClass('hidden')
-            $('.coats-item').addClass('hidden')
-            $('.pants-item').addClass('hidden')
-        }
-    })  
-    pants.click(function() {
-        if($('.pants-item').hasClass('hidden')) {
-            $('.pants-item').removeClass('hidden')
-            $('.dresses-item').addClass('hidden')
-            $('.jersey-item').addClass('hidden')
-            $('.coats-item').addClass('hidden')
-        }
-    })     
+        $(event.target).addClass('active');
+        // necesar sa resetam inainte sa adaugam alt continut, altfel append-ul va pastra si vechiul continut
+        productsWrapper.html('');
+        setProductsWrapperContent($(this).data('main-category'));
+    }); 
 
-    const productImg = $('.product-img');
+    // pentru continut adaugat dinamic ai nevoie de delegate, si nu as adauga click-ul pe product-img, ci pe product-wrapper
+    productsWrapper.delegate('.product-wrapper', 'click', function(e) {
+        let dataId = $(this).data('id'),
+            selfCategory = $(this).data('self-category'),
+            categoryArr = products[selfCategory],
+            productObj = {};
 
-    productImg.on('click', function (event) {
-        let dataId = event.target.dataset.id - 1;
-        const overlay = $('.overlay')
-        overlay.removeClass('hidden')
+        console.log('dataId: ', dataId)
+        console.log('selfCategory: ', selfCategory)
+        console.log('categoryArr: ', categoryArr)
 
-        let productBgImg = $('.product-bg-img')
-        productBgImg.css("background-image", `url('poze/${products['coats'][dataId].imgUrl}`)
-        let productCoatName = $('.product-name')
-        productCoatName.text(`${products['coats'][dataId].name}`)
-        let productPrice = $('.product-currency-price')
-        productPrice.text(`${products['coats'][dataId].currency} ${products['coats'][dataId].price}`)
-        let productCompozition = $('.product-composition')
-        productCompozition.text(`${products['coats'][dataId].composition}`)
-        let productCountry = $('.product-country')
-        productCountry.text(`${products['coats'][dataId].country}`)
-        let productCare = $('.product-care')
-        productCare.text(`${products['coats'][dataId].care}`)
+        // trebuie sa ne extragem obiectul care descrie produsul pe care suntem bazat pe id
+        for(let i=0; i<categoryArr.length; i++) {
+            if(categoryArr[i]['id'] === dataId) {
+                productObj = categoryArr[i];
+            } else {
+                continue;
+            }
+        };
 
-        $('.close-overlay').on('click', function () {
-            $('.overlay').addClass('hidden');
-        })
-    })
-    productImg.on('click', function (event) {
-        let dataId = event.target.dataset.id - 1;
-        const overlay = $('.overlay')
-        overlay.removeClass('hidden')
+        console.log('productObj: ', productObj)
 
-        let productBgImg = $('.product-bg-img')
-        productBgImg.css("background-image", `url('poze/${products['dresses'][dataId].imgUrl}`)
-        let productCoatName = $('.product-name')
-        productCoatName.text(`${products['dresses'][dataId].name}`)
-        let productPrice = $('.product-currency-price')
-        productPrice.text(`${products['dresses'][dataId].currency} ${products['dresses'][dataId].price}`)
-        let productCompozition = $('.product-composition')
-        productCompozition.text(`${products['dresses'][dataId].composition}`)
-        let productCountry = $('.product-country')
-        productCountry.text(`${products['dresses'][dataId].country}`)
-        let productCare = $('.product-care')
-        productCare.text(`${products['dresses'][dataId].care}`)
+        productBgImg.css("background-image", `url('poze/${productObj.imgUrl}`)
+        productCoatName.text(`${productObj.name}`)
+        productPrice.text(`${productObj.currency} ${productObj.price}`)
+        productCompozition.text(`${productObj.composition}`)
+        productCountry.text(`${productObj.country}`)
+        productCare.text(`${productObj.care}`)
+        
+        overlay.removeClass('hidden');
+    });
 
-        $('.close-overlay').on('click', function () {
-            $('.overlay').addClass('hidden');
-        })
-    })
-    productImg.on('click', function (event) {
-        let dataId = event.target.dataset.id - 1;
-        const overlay = $('.overlay')
-        overlay.removeClass('hidden')
-
-        let productBgImg = $('.product-bg-img')
-        productBgImg.css("background-image", `url('poze/${products['jersey'][dataId].imgUrl}`)
-        let productCoatName = $('.product-name')
-        productCoatName.text(`${products['jersey'][dataId].name}`)
-        let productPrice = $('.product-currency-price')
-        productPrice.text(`${products['jersey'][dataId].currency} ${products['jersey'][dataId].price}`)
-        let productCompozition = $('.product-composition')
-        productCompozition.text(`${products['jersey'][dataId].composition}`)
-        let productCountry = $('.product-country')
-        productCountry.text(`${products['jersey'][dataId].country}`)
-        let productCare = $('.product-care')
-        productCare.text(`${products['jersey'][dataId].care}`)
-
-        $('.close-overlay').on('click', function () {
-            $('.overlay').addClass('hidden');
-        })
-    })
-    productImg.on('click', function (event) {
-        let dataId = event.target.dataset.id - 1;
-        const overlay = $('.overlay')
-        overlay.removeClass('hidden')
-
-        let productBgImg = $('.product-bg-img')
-        productBgImg.css("background-image", `url('poze/${products['pants'][dataId].imgUrl}`)
-        let productCoatName = $('.product-name')
-        productCoatName.text(`${products['pants'][dataId].name}`)
-        let productPrice = $('.product-currency-price')
-        productPrice.text(`${products['pants'][dataId].currency} ${products['pants'][dataId].price}`)
-        let productCompozition = $('.product-composition')
-        productCompozition.text(`${products['pants'][dataId].composition}`)
-        let productCountry = $('.product-country')
-        productCountry.text(`${products['pants'][dataId].country}`)
-        let productCare = $('.product-care')
-        productCare.text(`${products['pants'][dataId].care}`)
-
-        $('.close-overlay').on('click', function () {
-            $('.overlay').addClass('hidden');
-        })
-    })
-
-})
+    $('.close-overlay').on('click', function () {
+        $('.overlay').addClass('hidden');
+    });
+});
