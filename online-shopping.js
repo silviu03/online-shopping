@@ -1,3 +1,4 @@
+// observatie generala: lipsesc cu totul ;
 $(function () {
 
     const productsWrapper = $('.products-wrapper');
@@ -40,6 +41,7 @@ $(function () {
         $(".products-wrapper").find(`[data-id=${productsObj.id}]`).addClass('hidden pants-item')
     }
 
+    // constantele, respectiv variabilele se declara de obicei la icneputul fisierului
     const coats = $('.coats'),
             dresses = $('.dresses'),
             jerseys = $('.jerseys'),
@@ -50,6 +52,8 @@ $(function () {
         item.removeClass('active')
         $(event.target).addClass('active')
     })
+
+    // cand ai mai multe evenimente de click pe o aceeasi selectie deja ar trebui sa fie u semnal de alarma ca ceva nu e ok
     coats.click(function() {
         if($('.coats-item').hasClass('hidden')) {
             $('.coats-item').removeClass('hidden')
@@ -88,6 +92,7 @@ $(function () {
     const productImg = $('.product-img');
 
     productImg.on('click', function (event) {
+        // acest id ia pozitia in array, NU id-ul produsului respectiv, de ce ai tu nevoie
         let dataId = event.target.dataset.id - 1;
         const overlay = $('.overlay')
         overlay.removeClass('hidden')
@@ -111,9 +116,11 @@ $(function () {
     })
     productImg.on('click', function (event) {
         let dataId = event.target.dataset.id - 1;
+        // e ok sa selectam sis a salvam in constanta sus, nu la fiecare click
         const overlay = $('.overlay')
         overlay.removeClass('hidden')
 
+        // si acestea le puteai declara sus, nicidecum la fiecare click
         let productBgImg = $('.product-bg-img')
         productBgImg.css("background-image", `url('poze/${products['dresses'][dataId].imgUrl}`)
         let productCoatName = $('.product-name')
@@ -127,6 +134,7 @@ $(function () {
         let productCare = $('.product-care')
         productCare.text(`${products['dresses'][dataId].care}`)
 
+        // nu are rost sa adaugam un eveniment de click in interiorul altui eveniment de click si o faci de mai multe ori inutil
         $('.close-overlay').on('click', function () {
             $('.overlay').addClass('hidden');
         })
