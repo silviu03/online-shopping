@@ -20,6 +20,7 @@ $(function () {
     };
 
     setProductsWrapperContent = function(mainCategory) {
+        console.log(products[mainCategory])
         for (let i = 0; i < products[mainCategory].length; i++) {
             let productsObj = products[mainCategory][i],
                 // avem nevoie sa pasam si mainCategory aici dupa la selectia informatiei pentru fiecare produs in parte
