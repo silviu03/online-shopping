@@ -246,6 +246,9 @@ main nav a {
     .container {
         font-size: 13px;
     }
+    header > div:first-child {
+        width: 60%;
+    }
     header h1, h2{
         font-size: 1.7rem;
     }
