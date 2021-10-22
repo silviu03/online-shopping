@@ -244,6 +244,7 @@ main nav a {
 
 @media screen and (max-width: 600px) {
     .container {
+        width: 100%;
         font-size: 13px;
     }
     header > div:first-child {
@@ -254,6 +255,9 @@ main nav a {
     }
     header span {
         font-size: 1rem;
+    }
+    main {
+        padding: 0;
     }
     .piggy-icon-wrapper {
         width: 150px;
