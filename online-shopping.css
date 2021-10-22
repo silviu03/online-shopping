@@ -33,7 +33,7 @@ header span {
     color: #fff;
     letter-spacing: 1px;
 }
-header .title {
+header h1, h2 {
     margin: 0;
     font-size: 2.5em;
     font-weight: bold;
@@ -121,6 +121,9 @@ main nav a {
     background-color: rgb(245, 227, 227);
     border-radius: 20px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .categories-wrapper a:hover {
     background-color: rgb(228, 210, 210);
@@ -155,7 +158,6 @@ main nav a {
     height: 350px;
     background-image: url(./poze/top-coat.jpg);
     background-position: center;
-    /* atentie, layout-ul cerea sa se repete totusi */
     background-repeat: no-repeat;
     background-size: cover;
     margin-bottom: -30px;
@@ -239,3 +241,43 @@ main nav a {
 .hidden {
     display: none;
 }
+
+@media screen and (max-width: 600px) {
+    .container {
+        font-size: 13px;
+    }
+    header h1, h2{
+        font-size: 1.7rem;
+    }
+    header span {
+        font-size: 1rem;
+    }
+    .piggy-icon-wrapper {
+        width: 150px;
+        height: 150px;
+        right: 30px;
+        top: 116px;
+    }
+    .categories-wrapper {
+        flex-wrap: wrap;
+        padding-bottom: 40px;
+    }
+    .categories-wrapper a {
+        width: 22%;
+        height: 70px;
+        text-align: center;
+        padding: 0;
+    }
+    .overlay-product-wrapper {
+        width: 70%;
+    }
+    .overlay-product-wrapper > div:first-child {
+        height: 320px;
+    }
+    .close-overlay {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 35px;
+    }
+  }
