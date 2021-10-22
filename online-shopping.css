@@ -261,6 +261,9 @@ main nav a {
         right: 30px;
         top: 116px;
     }
+    .products-wrapper > div {
+        width: 42%;
+    }
     .categories-wrapper {
         flex-wrap: wrap;
         padding-bottom: 40px;
